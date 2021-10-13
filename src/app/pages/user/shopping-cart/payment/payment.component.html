@@ -1,0 +1,54 @@
+<div class="bootstrap-wrapper">
+    <div class="container col-md-6 offset-mid-3">
+        <div class="row" style="margin-top: 20px">
+            <div class="col-md-10 text-center">
+                <mat-card>
+                    <!-- <div class="container text-center">
+                    <img src="../../../assets/logo.jpg" alt="" />
+                </div> -->
+                    <!-- <h1 class="text-center">Signup Here!!</h1> -->
+                    <!-- {{ user | json }} -->
+                    <form (ngSubmit)="formSubmit()" class="mr20">
+                        <mat-form-field class="full-width ml20 mr20" appearance="outline">
+                            <mat-label>Name: </mat-label>
+                            <input required [(ngModel)]="payment.name" name="name" type="text" matInput
+                                placeholder="Enter Your Name.." />
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width ml20 mr20" appearance="outline">
+                            <mat-label>Address: </mat-label>
+                            <input required [(ngModel)]="payment.address" name="address" type="text-area" matInput
+                                placeholder="Enter Your Address.." />
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width ml20 mr20" appearance="outline">
+                            <mat-label>Phone No: </mat-label>
+                            <input required [(ngModel)]="payment.phone" name="phone" type="number" matInput
+                                placeholder="Enter Contact Number.." />
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width ml20 mr20" appearance="outline">
+                            <mat-label>Card Number: </mat-label>
+                            <input required [(ngModel)]="payment.cardNumber" name="cardNumber" type="number" matInput
+                                placeholder="Enter Card Number" />
+                        </mat-form-field>
+                        <mat-form-field class="full-width ml20 mr20" appearance="outline">
+                            <mat-label>Expiry Date: </mat-label>
+                            <input required [(ngModel)]="payment.expDate" name="expDate" type="text" matInput
+                                placeholder="Enter Expiry Date MM/YY">
+                        </mat-form-field>
+                        <mat-form-field class="full-width ml20 mr20" appearance="outline">
+                            <mat-label>Name on the card: </mat-label>
+                            <input required [(ngModel)]="payment.nameOnCard" name="nameOnCard" matInput
+                                placeholder="Enter Name on the Card" />
+                        </mat-form-field>
+                        <div class="container text-center">
+                            <button mat-raised-button type="submit" color="primary">Pay Now</button>
+                            <!-- <button style="margin-left: 20px" mat-raised-button color="accent">Reset</button> -->
+                        </div>
+                    </form>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
