@@ -6,7 +6,6 @@ export class Medicine {
     prodDesc: string;
     offers: string;
     price: number;
-    // picByte: string; 
     category: Category; 
     active: boolean;
 

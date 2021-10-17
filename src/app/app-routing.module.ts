@@ -17,7 +17,6 @@ import { NormalGuard } from './service/normal.guard';
 import { AddMedicineComponent } from './pages/admin/add-medicine/add-medicine.component';
 import { UpdateMedicinesComponent } from './pages/admin/update-medicines/update-medicines.component';
 import { UserWelcomeComponent } from './pages/user/user-welcome/user-welcome.component';
-import { LoadMedicineComponent } from './pages/user/load-medicine/load-medicine.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -38,6 +37,7 @@ const routes: Routes = [
       children:[{ path : '', component:UserWelcomeComponent},
                 { path : 'profile', component:ProfileComponent},
                 { path : 'payment', component:PaymentComponent},
+                { path : 'search/:keyword', component:ShoppingCartComponent},
                 { path : ':catId', component:ShoppingCartComponent}
              ]
   }

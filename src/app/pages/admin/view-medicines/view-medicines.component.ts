@@ -1,6 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Medicine } from 'src/app/model/Medicine';
+import { Component, OnInit } from '@angular/core';
 import { MedicineService } from 'src/app/service/medicine.service';
 import Swal from 'sweetalert2';
 
@@ -10,12 +9,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./view-medicines.component.css']
 })
 export class ViewMedicinesComponent implements OnInit {
-
-  @Input()
-  medicine: Medicine;
-
-  @Output()
-  medicineDeletedEvent = new EventEmitter();
 
   medicines = [
     {
@@ -40,7 +33,6 @@ export class ViewMedicinesComponent implements OnInit {
         //success
         this.medicines = data;
         console.log(this.medicines);
-        // this.medicine.id= data.id;
         //alert('success');
         //Swal.fire('Successfully done');
 
@@ -57,8 +49,6 @@ export class ViewMedicinesComponent implements OnInit {
 
 
   removeMedicine(id) {
-    //id = String(id); 
-    // alert(typeof())
 
     Swal.fire({
       icon: 'info',
@@ -71,7 +61,6 @@ export class ViewMedicinesComponent implements OnInit {
 
         this.medicineService.deleteMedicine(id).subscribe(
           (data) => {
-            // this.medicineDeletedEvent.emit();
             // this.router.navigate(['admin', 'medicines']);
              this.medicines = this.medicines.filter((medicine)=> medicine.id != id);
             Swal.fire('Successfully done', 'Medicine Removed', 'success');

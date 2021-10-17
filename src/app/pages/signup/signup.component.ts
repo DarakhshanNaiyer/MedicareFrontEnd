@@ -29,6 +29,31 @@ export class SignupComponent implements OnInit {
   formSubmit(){
     console.log(this.user);
 
+   this.Validation();
+    
+    //addUser:userService
+    this.userService.addUser(this.user).subscribe(
+      (data:any) => {
+        //success
+        console.log(data);
+        //alert('success');
+        Swal.fire('Successfully done','User is registered and id is ' + data.id,'success');
+
+      },
+      (error) => {
+        //error
+        console.log(error);
+        this._snack.open('Something went wrong','',{
+          duration : 3000,
+          verticalPosition: 'top',
+        })
+        //alert('Something went wrong')
+      }
+    )
+  }
+
+  Validation(){
+
     if(this.user.username == '' || this.user.username == null){
       this._snack.open('Username is required !!', '', {
         duration : 3000,
@@ -77,26 +102,6 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    
-    //addUser:userService
-    this.userService.addUser(this.user).subscribe(
-      (data:any) => {
-        //success
-        console.log(data);
-        //alert('success');
-        Swal.fire('Successfully done','User is registered and id is ' + data.id,'success');
-
-      },
-      (error) => {
-        //error
-        console.log(error);
-        this._snack.open('Something went wrong','',{
-          duration : 3000,
-          verticalPosition: 'top',
-        })
-        //alert('Something went wrong')
-      }
-    )
   }
 
 }

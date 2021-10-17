@@ -1,8 +1,9 @@
 import { Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 import { Medicine } from 'src/app/model/Medicine';
-import { Product } from 'src/app/model/Product';
 import { MessengerService } from 'src/app/service/messenger.service';
+import { MedicineService } from 'src/app/service/medicine.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-item',
@@ -11,10 +12,12 @@ import { MessengerService } from 'src/app/service/messenger.service';
 })
 export class ProductItemComponent implements OnInit {
 
+  medicines;
+  
   @Input()
   productItem: Medicine;
 
-  constructor(private msg: MessengerService, private _router: Router) { }
+  constructor(private msg: MessengerService, private medicineService: MedicineService, private _router: Router) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +29,19 @@ export class ProductItemComponent implements OnInit {
   buyMedicine() {
 
     this._router.navigate(['/user-dashboard/payment']);
+  }
+
+
+  seachByName(name){
+    this.medicineService.searchByName(name).subscribe(
+      (data : any) => {
+        this.medicines = data;
+      },
+      (error) => {
+        console.log(error);
+        Swal.fire('Error !!', 'Error in loading data', 'error');
+      }
+    )
   }
 
 }

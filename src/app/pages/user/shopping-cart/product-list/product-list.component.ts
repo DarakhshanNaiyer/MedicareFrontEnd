@@ -1,9 +1,8 @@
-import { ProductService } from './../../../../service/product.service';
+
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/model/Product';
 import { MedicineService } from 'src/app/service/medicine.service';
 import { ActivatedRoute } from '@angular/router';
-import { Medicine } from 'src/app/model/Medicine';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-list',
@@ -12,19 +11,34 @@ import { Medicine } from 'src/app/model/Medicine';
 })
 export class ProductListComponent implements OnInit {
 
-  // productList: Product[] = [];
-
   catId;
   medicines;
+  keyWord;
+  searchMode: boolean;
 
-
-  constructor(private ProductService: ProductService,
+  constructor(
     private medicineService: MedicineService,
     private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // this.productList = this.ProductService.getProducts();
 
+    this._route.paramMap.subscribe(() => {
+      this.listproduct();
+    })
+    
+  }
+
+  listproduct() {
+    this.searchMode = this._route.snapshot.paramMap.has('keyword');
+    console.log(this.searchMode)
+    if(this.searchMode){
+      this.handleSearchProducts();
+    }else{
+      this.handleListProducts();
+    }  
+  }
+
+  handleListProducts(){
     this._route.params.subscribe((params) => {
       this.catId = params.catId;
       if (this.catId == 0) {
@@ -32,25 +46,10 @@ export class ProductListComponent implements OnInit {
 
         this.medicineService.getActiveMedicines().subscribe(
           (data: any) => {
-            //console.log(data.active)
-
-            //   if(data=='Active'){
-            //     console.log(data)
-            // }
             this.medicines = data;
-            // this.medicines.forEach(element => {
-
-            //   if (element.active == 'true') {
-            //     console.log(this.medicines)
-            //   }
-
-            // });
-
-           // console.log(this.medicines.active);
-          },
+           },
           (error) => {
             console.log(error);
-            //alert('Error in loading medicines');
           }
         );
       } else {
@@ -68,5 +67,20 @@ export class ProductListComponent implements OnInit {
         );
       }
     });
+  }
+
+
+  handleSearchProducts(){
+    const theKeyword = this._route.snapshot.paramMap.get('keyword');
+    this.medicineService.searchByName(theKeyword).subscribe(
+      (data: any) => {
+        this.medicines = data;
+        console.log(this.medicines)
+      },
+      (error) => {
+        console.log(error);
+        Swal.fire('Error !!', 'Error in loading data', 'error');
+      }
+    )
   }
 }

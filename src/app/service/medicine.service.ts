@@ -48,6 +48,10 @@ export class MedicineService {
     return this.httpClient.get('http://localhost:8080/medicines/category/active/' +cid);
   }
 
+  //get medicines by name
+  public searchByName(theKeyword) {
+    return this.httpClient.get('http://localhost:8080/medicines/active/' + theKeyword);
+  }
 
 
 }

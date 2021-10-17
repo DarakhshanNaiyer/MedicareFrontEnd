@@ -3,8 +3,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoryService } from 'src/app/service/category.service';
 import { MedicineService } from 'src/app/service/medicine.service';
 import Swal from 'sweetalert2';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
 
 @Component({
   selector: 'app-add-medicine',
@@ -13,7 +11,6 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 })
 export class AddMedicineComponent implements OnInit {
 
-  public Editor = ClassicEditor;
   categories =[
     {
       cid:'',
